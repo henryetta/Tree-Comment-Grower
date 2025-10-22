@@ -17,12 +17,7 @@ Our extension monitors text input **in real-time** on social media platforms to 
 
 **Social Media Platforms:**
 - `https://twitter.com/*` & `https://x.com/*` - Monitor comment composition boxes
-- `https://facebook.com/*` - Monitor Facebook comment fields
 - `https://instagram.com/*` - Monitor Instagram comment inputs
-- `https://linkedin.com/*` - Monitor LinkedIn post/comment fields
-- `https://reddit.com/*` - Monitor Reddit comment threads
-- `https://youtube.com/*` - Monitor YouTube comment sections
-- `https://tiktok.com/*` - Monitor TikTok comment fields
 
 **Backend Access:**
 - `https://*.supabase.co/*` - Connect to our Supabase serverless backend for:
