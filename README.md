@@ -35,12 +35,12 @@ Our extension monitors text input **in real-time** on social media platforms to 
 
 ## What Data We Access
 
-### ✅ What We DO Access:
+### What We DO Access:
 1. **Text typed in comment boxes** - Only analyzed locally via on-device AI
 2. **Comment submission events** - To record when user posts a comment
 3. **DOM structure** - To identify comment input fields on different platforms
 
-### ❌ What We DON'T Access:
+### What We DON'T Access:
 - Private messages or DMs
 - User passwords or authentication tokens
 - Feed content from other users
@@ -142,20 +142,20 @@ Our extension monitors text input **in real-time** on social media platforms to 
 
 ## Compliance & Transparency
 
-✅ Privacy Policy: Published at [URL - link to your privacy policy]
-✅ Data Usage Disclosure: All collected data types declared in store listing
-✅ User Consent: Explicit signup required before any monitoring begins
-✅ Data Access: Users can view/export/delete all data via extension UI
-✅ Open Source: Code available for audit (if applicable)
-✅ No Hidden Behavior: Extension does exactly what description states
+Privacy Policy: Published at in this repository
+Data Usage Disclosure: All collected data types declared in store listing
+User Consent: Explicit signup required before any monitoring begins
+Data Access: Users can view/export/delete all data via extension UI
+Open Source: Code available for audit (if applicable)
+No Hidden Behavior: Extension does exactly what description states
 
 ---
 
 ## Contact Information
 
-**Developer:** [Your Name/Organization]
-**Support Email:** [Your Support Email]
-**Privacy Inquiries:** [Privacy Contact Email]
+**Developer:** Daegu Gyeongbuk Institute of Science and Technology
+**Support Email:** osaruiyobo@dgist.ac.kr
+**Privacy Inquiries:** sunjun@dgist.ac.kr
 **Extension Version:** 1.0
 
 ---
