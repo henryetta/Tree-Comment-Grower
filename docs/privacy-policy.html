@@ -1,159 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - Tree Growth Extension</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy – Tree Growth Extension</title>
+  <meta name="description" content="Privacy Policy for the Tree Growth Chrome Extension (research study on encouraging positive online interactions).">
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      line-height: 1.6;
-      color: #333;
-    }
-    h1 {
-      color: #2d5016;
-      border-bottom: 3px solid #4caf50;
-      padding-bottom: 10px;
-    }
-    h2 {
-      color: #2d5016;
-      margin-top: 30px;
-    }
-    .last-updated {
-      color: #666;
-      font-style: italic;
-    }
-    .contact {
-      background: #f5f5f5;
-      padding: 20px;
-      border-radius: 5px;
-      margin-top: 30px;
-    }
-    ul {
-      padding-left: 25px;
-    }
-    li {
-      margin: 10px 0;
+    :root { --fg:#0f172a; --muted:#475569; --bg:#ffffff; --accent:#16a34a; --card:#f8fafc; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; color: var(--fg); background: var(--bg); line-height: 1.55; }
+    header { background: var(--card); border-bottom: 1px solid #e2e8f0; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.9rem; margin: 0 0 8px; }
+    h2 { font-size: 1.35rem; margin-top: 28px; }
+    h3 { font-size: 1.05rem; margin-top: 20px; }
+    p, li { color: var(--fg); }
+    .muted { color: var(--muted); }
+    .badge { display:inline-block; padding: 4px 10px; background: #ecfdf5; color: var(--accent); border:1px solid #bbf7d0; border-radius: 999px; font-size: 0.85rem; }
+    .card { background: var(--card); border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; }
+    ul { padding-left: 20px; }
+    a { color: #0ea5e9; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #f1f5f9; }
+    footer { margin-top: 40px; padding: 24px 0; border-top:1px solid #e2e8f0; color: var(--muted); font-size: 0.95rem; }
+    .toc { font-size: 0.95rem; }
+    .toc a { display:block; padding: 4px 0; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg:#e5e7eb; --muted:#94a3b8; --bg:#0b1020; --card:#0f172a; --accent:#22c55e; }
+      body { color: var(--fg); background: var(--bg); }
+      header { border-color: #1f2937; }
+      .card, th, td { border-color:#1f2937; }
+      th { background:#0b1222; }
+      a { color: #38bdf8; }
     }
   </style>
 </head>
 <body>
-  <h1>Privacy Policy - Tree Growth Extension</h1>
-  <p class="last-updated">Last Updated: October 22, 2025</p>
+  <header>
+    <div class="wrap">
+      <span class="badge">Privacy Policy</span>
+      <h1>Tree Growth Extension</h1>
+      <p class="muted">Last updated: <strong>October 22, 2025</strong></p>
+    </div>
+  </header>
 
-  <h2>1. Introduction</h2>
-  <p>
-    This Chrome extension ("Tree Growth Extension") is part of an academic research study investigating 
-    gamification approaches to encourage positive social media behavior. This privacy policy explains 
-    how we collect, use, and protect your data.
-  </p>
+  <main class="wrap">
+    <section class="toc card" aria-label="Table of contents">
+      <strong>Contents</strong>
+      <nav>
+        <div class="toc">
+          <a href="#intro">1. Introduction</a>
+          <a href="#data">2. Data We Collect</a>
+          <a href="#use">3. How We Use Data</a>
+          <a href="#security">4. Processing &amp; Security</a>
+          <a href="#retention">5. Data Retention</a>
+          <a href="#rights">6. Your Choices &amp; Rights</a>
+          <a href="#study">7. Study Information</a>
+          <a href="#contact">8. How to Contact Us / Data Requests</a>
+          <a href="#third">9. Third-Party Services</a>
+          <a href="#permissions">10. Chrome Permissions</a>
+          <a href="#children">11. Children’s Privacy</a>
+          <a href="#changes">12. Changes to This Policy</a>
+          <a href="#disclosure">Appendix: Chrome Web Store Data Disclosure Mapping</a>
+        </div>
+      </nav>
+    </section>
 
-  <h2>2. Data We Collect</h2>
-  <p>The extension collects the following information:</p>
-  <ul>
-    <li><strong>Email Address:</strong> Used solely for lottery winner notifications</li>
-    <li><strong>Social Media Comments:</strong> Comments you post on supported platforms (Twitter, Instagram, Facebook, LinkedIn, Reddit) are analyzed to determine sentiment</li>
-    <li><strong>Tree Growth Data:</strong> Your tree planting choices, growth progress, and completion status</li>
-    <li><strong>Weekly Statistics:</strong> Aggregated data on your commenting activity and sentiment scores</li>
-    <li><strong>Leaderboard Data:</strong> Your rank and points for monthly competitions</li>
-    <li><strong>Extension Usage:</strong> Basic analytics on feature usage and engagement</li>
-  </ul>
+    <section id="intro">
+      <h2>1. Introduction</h2>
+      <p>The <strong>Tree Growth Extension</strong> is part of an academic research study on encouraging positive online interactions using gamified feedback. This policy explains what data we collect, how we use it, and your choices.</p>
+    </section>
 
-  <h2>3. How We Use Your Data</h2>
-  <ul>
-    <li><strong>Sentiment Analysis:</strong> Comments are analyzed using AI to categorize them as positive, neutral, or negative. Positive comments contribute to tree growth</li>
-    <li><strong>Gamification:</strong> Data is used to calculate tree growth, award lottery tickets, and maintain leaderboards</li>
-    <li><strong>Notifications:</strong> Email is used only to notify lottery winners at the end of each month (top 50 users receive lottery tickets to spin a reward wheel)</li>
-    <li><strong>Research:</strong> Aggregated, anonymized data may be used in academic publications about social media behavior and gamification</li>
-  </ul>
+    <section id="data">
+      <h2>2. Data We Collect</h2>
+      <p>We only collect data necessary to operate the extension and conduct the study.</p>
+      <h3>Account &amp; Contact (optional)</h3>
+      <ul>
+        <li><strong>Username</strong> (required for leaderboard)</li>
+        <li><strong>Email</strong> (only if you choose to receive lottery rewards)</li>
+      </ul>
+      <h3>Comment Interaction Data</h3>
+      <ul>
+        <li><strong>Comment text</strong> (the text you write in comment input fields)</li>
+        <li><strong>Timestamp</strong> of the comment event</li>
+        <li><strong>Platform label</strong> (a short identifier of the site where the comment was written)</li>
+        <li><strong>AI classification result</strong> (e.g., Normal, Trolling, Profanity, Microaggression, Derogatory, Hate Speech)</li>
+      </ul>
+      <h3>Tree &amp; Engagement Data</h3>
+      <ul>
+        <li>Selected tree type, growth/health status, progress history, weekly stats</li>
+        <li>Leaderboard rank and points</li>
+        <li>Optional lottery ticket count and prize outcomes</li>
+      </ul>
+      <h3>Extension Usage (basic, non-advertising analytics)</h3>
+      <ul>
+        <li>Feature usage needed to ensure functionality and improve stability (e.g., number of analyses run)</li>
+      </ul>
+      <p class="muted">We do <strong>not</strong> collect passwords, cookies, browsing history, private messages, or unrelated page content.</p>
+    </section>
 
-  <h2>4. Data Storage and Security</h2>
-  <ul>
-    <li>All data is stored securely in Supabase (a secure cloud database platform)</li>
-    <li>Data is encrypted in transit and at rest</li>
-    <li>Only the research team has access to identifiable data</li>
-    <li>Your data is NOT sold or shared with third parties</li>
-    <li>Your data is NOT shared with social media platforms</li>
-  </ul>
+    <section id="use">
+      <h2>3. How We Use Data</h2>
+      <ul>
+        <li><strong>Real-time feedback:</strong> Analyze comment text locally with an on-device model to update tree growth (water vs. poison).</li>
+        <li><strong>Gamification:</strong> Calculate growth, weekly rankings, and optional lottery eligibility.</li>
+        <li><strong>Sync &amp; Continuity:</strong> Sync your progress and leaderboard status across sessions/devices.</li>
+        <li><strong>Contact (optional):</strong> Send prize notifications to lottery winners (email required only for this purpose).</li>
+        <li><strong>Research:</strong> Use aggregated and anonymized data for academic analysis and publications.</li>
+      </ul>
+    </section>
 
-  <h2>5. Data Retention</h2>
-  <p>
-    Data is retained for the duration of the research study (approximately 12 weeks from your first use) 
-    plus an additional period for analysis. After the study concludes, identifiable information may be 
-    anonymized or deleted.
-  </p>
+    <section id="security">
+      <h2>4. Processing &amp; Security</h2>
+      <ul>
+        <li><strong>Local analysis:</strong> AI text classification is performed <strong>entirely in your browser</strong> (offscreen document) before any sync.</li>
+        <li><strong>Backend:</strong> We use <strong>Supabase</strong> to store only the minimal data listed above for account sync, leaderboard, and optional lottery.</li>
+        <li><strong>Protection:</strong> Data is encrypted in transit and at rest. Access is limited to the research team. We do not sell or share data with advertisers or social platforms.</li>
+      </ul>
+    </section>
 
-  <h2>6. Your Rights</h2>
-  <p>You have the right to:</p>
-  <ul>
-    <li><strong>Access Your Data:</strong> Request a copy of all data we have collected about you</li>
-    <li><strong>Delete Your Data:</strong> Request deletion of your account and all associated data</li>
-    <li><strong>Withdraw:</strong> Stop using the extension at any time by uninstalling it</li>
-    <li><strong>Opt Out:</strong> Decline participation in the research study while still using the extension</li>
-  </ul>
+    <section id="retention">
+      <h2>5. Data Retention</h2>
+      <p>We retain identifiable data for the <strong>duration of the study</strong> (typically 8–12 weeks from your first use) and delete or anonymize it within <strong>21 days after the study concludes</strong>. You may request deletion at any time (see <a href="#contact">§8</a>).</p>
+    </section>
 
-  <h2>7. Research Study Information</h2>
-  <ul>
-    <li><strong>Study Title:</strong> Gamifying Positive Social Media Behavior Through Tree Growth Visualization</li>
-    <li><strong>Institution:</strong> Daegu Gyeongbuk Institute of Science and Technology, South Korea</li>
-    <li><strong>Study Duration:</strong> 8-12 weeks per participant</li>
-  </ul>
+    <section id="rights">
+      <h2>6. Your Choices &amp; Rights</h2>
+      <ul>
+        <li><strong>Access:</strong> Request a copy of your data.</li>
+        <li><strong>Deletion:</strong> Request deletion of your account and associated data.</li>
+        <li><strong>Withdraw:</strong> Uninstall the extension to stop participation.</li>
+        <li><strong>Email optionality:</strong> You can use the extension without email; email is required only if you choose to receive lottery rewards.</li>
+      </ul>
+    </section>
 
-  <h2>8. Third-Party Services</h2>
-  <p>This extension uses the following third-party services:</p>
-  <ul>
-    <li><strong>Supabase:</strong> For secure data storage and backend functionality</li>
-    <li><strong>Built in Custom AI Sentiment Analysis:</strong> Your comments are analyzed using a personalized built-in AI model to determine sentiment (positive, neutral, or negative)</li>
-  </ul>
-  <p>
-    Comment text is processed by our AI system solely for sentiment analysis purposes. The AI model 
-    is part of the research infrastructure and does not share data with external AI service providers.
-    <br>• Supabase Privacy Policy: https://supabase.com/privacy
-  </p>
+    <section id="study">
+      <h2>7. Study Information</h2>
+      <ul>
+        <li><strong>Title:</strong> Gamifying Positive Social Media Behavior Through Tree Growth Visualization</li>
+        <li><strong>Institution:</strong> Daegu Gyeongbuk Institute of Science and Technology (DGIST), South Korea</li>
+        <li><strong>Typical Duration:</strong> 8–12 weeks per participant</li>
+      </ul>
+    </section>
 
-  <h2>9. Permissions Justification</h2>
-  <p>The extension requests the following Chrome permissions:</p>
-  <ul>
-    <li><strong>Storage:</strong> To save your user ID and extension settings locally</li>
-    <li><strong>Host Permissions:</strong> To detect when you post comments on supported social media platforms</li>
-    <li><strong>Scripting:</strong> To integrate with social media pages and detect comment submissions</li>
-  </ul>
+    <section id="contact">
+      <h2>8. How to Contact Us / Data Requests</h2>
+      <p>Email: <a href="mailto:osaruiyobo@dgist.ac.kr">osaruiyobo@dgist.ac.kr</a></p>
+      <p>Department: Electrical Engineering and Computer Science, DGIST</p>
+      <p>For deletion, email with subject <strong>“Tree Growth Extension – Data Deletion Request”</strong> and include your <strong>extension user ID</strong> (shown in the extension settings).</p>
+    </section>
 
-  <h2>10. Children's Privacy</h2>
-  <p>
-    This extension is not intended for users under 18 years of age. We do not knowingly collect 
-    data from children. If you are under 18, please do not use this extension.
-  </p>
+    <section id="third">
+      <h2>9. Third-Party Services</h2>
+      <ul>
+        <li><strong>Supabase</strong> – secure backend for sync, leaderboard, and (optional) lottery logistics. Privacy: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">https://supabase.com/privacy</a></li>
+      </ul>
+      <p>No external AI service receives your comment text. The AI model runs locally in your browser.</p>
+    </section>
 
-  <h2>11. Changes to This Policy</h2>
-  <p>
-    We may update this privacy policy from time to time. Significant changes will be communicated 
-    through the extension interface. Continued use after changes indicates acceptance of the updated policy.
-  </p>
+    <section id="permissions">
+      <h2>10. Chrome Permissions (Purpose-Bound)</h2>
+      <ul>
+        <li><strong>activeTab:</strong> Run analysis only on the tab where you write a comment.</li>
+        <li><strong>scripting:</strong> Inject a content script to read only the text you type into comment fields.</li>
+        <li><strong>offscreen:</strong> Run local AI classification without blocking the browser UI.</li>
+        <li><strong>storage:</strong> Save preferences, tree state, and minimal history needed for core features.</li>
+      </ul>
+      <p>We request no permissions for advertising, tracking, or unrelated content access.</p>
+    </section>
 
-  <div class="contact">
-    <h2>12. Contact Information</h2>
-    <p>For questions, concerns, or data requests, please contact:</p>
-    <p>
-      <strong>Research Team:</strong><br>
-      Email: osaruiyobo@dgist.ac.kr<br>
-      Institution: Daegu Gyeongbuk Institute of Science and Technology<br>
-      Department: Electrical Engineering and Computer Science
-    </p>
-    <p>
-      <strong>To Request Data Deletion:</strong><br>
-      Email osaruiyobo@dgist.ac.kr with subject line "Tree Growth Extension - Data Deletion Request"<br>
-      Include your extension user ID (found in extension settings)
-    </p>
-  </div>
+    <section id="children">
+      <h2>11. Children’s Privacy</h2>
+      <p>Not intended for users under 18. We do not knowingly collect data from children.</p>
+    </section>
 
-  <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
-  
-  <p style="text-align: center; color: #666; font-size: 14px;">
-    By using this extension, you acknowledge that you have read and understood this privacy policy.
-  </p>
+    <section id="changes">
+      <h2>12. Changes to This Policy</h2>
+      <p>We may update this policy. Significant changes will be announced in the extension UI. Continued use after an update indicates acceptance of the revised policy.</p>
+    </section>
+
+    <section id="disclosure" class="card" aria-label="Chrome Web Store Data Disclosure Mapping">
+      <h2>Appendix: Chrome Web Store Data Disclosure Mapping</h2>
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Items</th><th>Purpose</th><th>Shared</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Personal info</strong></td>
+            <td>Username (leaderboard), Email (optional for lottery)</td>
+            <td>App functionality, user communications (lottery only)</td>
+            <td>Not sold; not shared with advertisers</td>
+          </tr>
+          <tr>
+            <td><strong>User activity / Content</strong></td>
+            <td>Comment text, timestamp, platform label, AI category</td>
+            <td>App functionality, research (aggregated/anonymized)</td>
+            <td>Not sold; not shared with advertisers</td>
+          </tr>
+          <tr>
+            <td><strong>App info &amp; performance</strong></td>
+            <td>Basic, non-advertising usage needed for functionality</td>
+            <td>App functionality and quality</td>
+            <td>Not sold; not shared with advertisers</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Tree Growth Research Team, DGIST. This extension is for academic research.</p>
+    </footer>
+  </main>
 </body>
 </html>
+
+
+
