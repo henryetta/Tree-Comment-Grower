@@ -6,7 +6,7 @@ let ExtensionDetectionService = null;
 
 class TreeGrowthBackground {
   constructor() {
-    console.log('🌳 TreeGrowthBackground: Initializing...');
+    console.log('TreeGrowthBackground: Initializing...');
     this.commentQueue = [];
     this.isProcessing = false;
     this.detectionService = null;
@@ -17,24 +17,24 @@ class TreeGrowthBackground {
     this.syncPendingCommentsToBackend();
     setInterval(() => this.syncPendingCommentsToBackend(), 10 * 60 * 1000);
 
-    console.log('🌳 TreeGrowthBackground: Initialized successfully');
+    console.log(' TreeGrowthBackground: Initialized successfully');
   }
 
   initializeExtension() {
-    console.log('🌳 TreeGrowthBackground: Setting up extension listeners...');
+    console.log('TreeGrowthBackground: Setting up extension listeners...');
 
     chrome.runtime.onStartup.addListener(() => {
-      console.log('🌳 Extension startup detected');
+      console.log('Extension startup detected');
       this.initializeUserData();
     });
 
     chrome.runtime.onInstalled.addListener(() => {
-      console.log('🌳 Extension installed/updated');
+      console.log('Extension installed/updated');
       this.initializeUserData();
     });
 
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      console.log('🌳 Message listener triggered');
+      console.log('Message listener triggered');
       this.handleMessage(message, sender, sendResponse);
       return true; // keep the channel open for async replies
     });
@@ -42,12 +42,12 @@ class TreeGrowthBackground {
     // Periodic queue processor
     setInterval(() => this.processCommentQueue(), 5000);
 
-    console.log('🌳 TreeGrowthBackground: Listeners set up successfully');
+    console.log('TreeGrowthBackground: Listeners set up successfully');
   }
 
   async initializeUserData() {
     try {
-      // Optional detection service init (currently fallback only)
+      // Optional detection service init 
       try {
         if (!this.detectionService) {
           console.log('Using fallback detection method');
@@ -85,7 +85,7 @@ class TreeGrowthBackground {
         console.log('Tree Growth extension initialized with default data');
       }
 
-      // ✅ FIX: Auto-register anonymous user in backend if not already registered
+      //Auto-register anonymous user in backend if not already registered
       if (!result.treeGrowth_userData) {
         console.log('📡 No user data found, creating anonymous user...');
         const extensionUserId = BackendIntegration.generateExtensionUserId();
@@ -93,29 +93,26 @@ class TreeGrowthBackground {
         const userData = {
           extensionUserId,
           username: `User_${extensionUserId.slice(-6)}`, // Anonymous username
-          email: '', // Empty email for anonymous users, can be updated later
           signupDate: new Date().toISOString(),
           id: `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
         };
         
         await chrome.storage.local.set({ treeGrowth_userData: userData });
         
-        // Register in backend (email can be empty for anonymous users)
+        // Register in backend 
         try {
           const backendResult = await BackendIntegration.registerUserBackend(
             userData.username, 
-            userData.email, 
             extensionUserId
           );
           
           if (backendResult.success) {
-            console.log('✅ Anonymous user registered in backend');
+            console.log('Anonymous user registered in backend');
           } else {
-            console.warn('⚠️ Anonymous user registration failed:', backendResult.error);
+            console.warn('Anonymous user registration failed:', backendResult.error);
           }
         } catch (error) {
-          console.warn('⚠️ Could not register user in backend:', error);
-          // Continue anyway - user can register later
+          console.warn('Could not register user in backend:', error);
         }
       }
     } catch (error) {
@@ -124,40 +121,40 @@ class TreeGrowthBackground {
   }
 
   async handleMessage(message, sender, sendResponse) {
-    console.log('🌳 Background: Received message:', message?.type);
-    console.log('🌳 Background: Message data:', message);
+    console.log('Background: Received message:', message?.type);
+    console.log('Background: Message data:', message);
 
     (async () => {
       try {
         switch (message.type) {
           case 'NEW_COMMENT':
-            console.log('🌳 Background: Handling NEW_COMMENT');
+            console.log('Background: Handling NEW_COMMENT');
             await this.queueComment(message.data);
             sendResponse({ success: true });
             break;
 
           case 'GET_USER_DATA':
-            console.log('🌳 Background: Handling GET_USER_DATA');
+            console.log('Background: Handling GET_USER_DATA');
             sendResponse({ success: true, data: await this.getUserData() });
             break;
 
           case 'UPDATE_USER_DATA':
-            console.log('🌳 Background: Handling UPDATE_USER_DATA');
+            console.log('Background: Handling UPDATE_USER_DATA');
             await this.updateUserData(message.data);
             sendResponse({ success: true });
             break;
 
           case 'ANALYZE_COMMENT':
-            console.log('🌳 Background: Handling ANALYZE_COMMENT');
+            console.log('Background: Handling ANALYZE_COMMENT');
             sendResponse({ success: true, analysis: await this.analyzeComment(message.comment) });
             break;
 
           default:
-            console.warn('🌳 Background: Unknown message type:', message.type);
+            console.warn('Background: Unknown message type:', message.type);
             sendResponse({ success: false, error: 'Unknown message type' });
         }
       } catch (error) {
-        console.error('🌳 Background: Error handling message:', error);
+        console.error('Background: Error handling message:', error);
         sendResponse({ success: false, error: error.message });
       }
     })();
@@ -202,11 +199,11 @@ class TreeGrowthBackground {
 
   async processComment(commentData) {
     try {
-      console.log('🌳 Processing comment:', (commentData.text || '').substring(0, 50) + '...');
+      console.log('Processing comment:', (commentData.text || '').substring(0, 50) + '...');
 
       // Analyze comment with keyword-based fallback
       const analysis = await this.analyzeComment(commentData.text);
-      console.log('🌳 Analysis result:', analysis);
+      console.log('Analysis result:', analysis);
 
       // Update user stats
       const userData = await this.getUserData();
@@ -220,9 +217,9 @@ class TreeGrowthBackground {
         data: { analysis, commentData, newStats: updatedData.weeklyStats }
       });
 
-      console.log('🌳 Comment processed successfully!');
+      console.log('Comment processed successfully!');
 
-      // ✅ Backend sync (wrapped so local flow never fails)
+      // Backend sync (wrapped so local flow never fails)
       try {
         const storageResult = await chrome.storage.local.get(['treeGrowth_userData']);
         const userProfile = storageResult.treeGrowth_userData;
@@ -244,7 +241,7 @@ class TreeGrowthBackground {
           );
 
           if (backendResult.success) {
-            console.log('✅ Comment synced to backend successfully');
+            console.log('Comment synced to backend successfully');
 
             // Mark comment as synced
             const idx = updatedData.commentHistory.findIndex(
@@ -271,20 +268,19 @@ class TreeGrowthBackground {
                 }
               );
               if (treeUpdateResult.success) {
-                console.log('✅ Tree stats updated in backend');
+                console.log('Tree stats updated in backend');
               } else {
-                console.warn('⚠️ Tree stats update failed:', treeUpdateResult.error);
+                console.warn('Tree stats update failed:', treeUpdateResult.error);
               }
             }
           } else {
-            console.warn('⚠️ Backend comment sync failed:', backendResult.error);
+            console.warn('Backend comment sync failed:', backendResult.error);
           }
         } else {
-          console.log('⏭️ Skipping backend sync - no user extensionUserId found');
+          console.log('Skipping backend sync - no user extensionUserId found');
         }
       } catch (backendError) {
-        console.error('❌ Backend sync error:', backendError);
-        // Don't throw - allow local processing to continue
+        console.error(' Backend sync error:', backendError);
       }
 
     } catch (error) {
@@ -321,7 +317,7 @@ class TreeGrowthBackground {
     let confidence = 0.5;
     let impact = 1;
 
-    // Priority order: Hate Speech > Derogatory > Microaggression > Profanity > Trolling > Normal (positive)
+    // Priority order: Hate Speech > Derogatory > Microaggression > Profanity > Trolling > Normal (positive or neutral)
     if (cHate > 0) {
       category = 'Hate Speech';
       sentiment = 'negative';
@@ -375,85 +371,123 @@ class TreeGrowthBackground {
   updateStatsFromComment(userData, analysis, commentData) {
     const currentWeek = this.getCurrentWeek();
 
-    // Check for new week and award tickets
-    if (userData.weeklyStats.currentWeek !== currentWeek) {
-      const lastWeekPosition = this.calculateUserPosition(userData.weeklyStats);
-      if (lastWeekPosition <= 50 && userData.weeklyStats.totalComments > 0) {
-        userData.tickets = (userData.tickets || 0) + 1;
-        console.log(`Ticket earned! User was rank #${lastWeekPosition} last week. Total tickets: ${userData.tickets}`);
-      }
-
-      userData.weeklyStats = {
-        positiveComments: 0,
-        negativeComments: 0,
-        totalComments: 0,
-        currentWeek
-      };
+    // --- Weekly Reset + Ticket Awarding ---
+  if (userData.weeklyStats.currentWeek !== currentWeek) {
+    const lastWeekPosition = this.calculateUserPosition(userData.weeklyStats);
+    if (lastWeekPosition <= 50 && userData.weeklyStats.totalComments > 0) {
+      userData.tickets = (userData.tickets || 0) + 1;
+      console.log(`🎟 Ticket earned! Rank #${lastWeekPosition}. Total tickets: ${userData.tickets}`);
     }
 
-    userData.weeklyStats.totalComments++;
-
-    // Handle positive comments
-    if (analysis.sentiment === 'positive') {
-      userData.weeklyStats.positiveComments++;
-      userData.totalWaterDrops = (userData.totalWaterDrops || 0) + analysis.impact;
-
-      if (userData.selectedTree && userData.trees.length > 0) {
-        const tree = userData.trees.find(t => t.id === userData.selectedTree);
-        if (tree && tree.status === 'growing') {
-          tree.health = Math.min(100, (tree.health || 0) + analysis.impact);
-          tree.growthProgress = Math.min(100, (tree.growthProgress || 0) + analysis.impact * 0.5);
-          tree.waterDrops = (tree.waterDrops || 0) + analysis.impact;
-          tree.lastWatered = new Date().toISOString();
-        }
-      }
-    } 
-    // Handle negative comments
-    else if (analysis.sentiment === 'negative') {
-      userData.weeklyStats.negativeComments++;
-      userData.totalPoisonDrops = (userData.totalPoisonDrops || 0) + analysis.impact;
-
-      if (userData.selectedTree && userData.trees.length > 0) {
-        const tree = userData.trees.find(t => t.id === userData.selectedTree);
-        if (tree && tree.status === 'growing') {
-          tree.health = Math.max(0, (tree.health || 0) - analysis.impact);
-          tree.poisonDrops = (tree.poisonDrops || 0) + analysis.impact;
-          tree.lastPoisoned = new Date().toISOString();
-
-          if (tree.health <= 0) {
-            tree.status = 'dead';
-            tree.deathDate = new Date().toISOString();
-          }
-        }
-      }
-    }
-
-    // Add to comment history
-    userData.commentHistory = userData.commentHistory || [];
-    userData.commentHistory.unshift({
-      id: `comment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      text: commentData.text,
-      platform: commentData.platform || 'unknown',
-      url: commentData.url || '',
-      sentiment: analysis.sentiment,
-      impact: analysis.impact,
-      timestamp: commentData.timestamp || new Date().toISOString(),
-      category: analysis.category,
-      confidence: analysis.confidence,
-      syncedToBackend: false,
-      backendId: null
-    });
-
-    // Keep only last 100 comments
-    if (userData.commentHistory.length > 100) {
-      userData.commentHistory = userData.commentHistory.slice(0, 100);
-    }
-
-    return userData;
+    userData.weeklyStats = {
+      positiveComments: 0,
+      neutralComments: 0,
+      negativeComments: 0,
+      totalComments: 0,
+      currentWeek
+    };
   }
 
+  // Always count comment
+  userData.weeklyStats.totalComments++;
+
+  // --- UNIFIED SCORING SYSTEM ---
+  let score = 0;
+  const sentiment = analysis.sentiment?.toLowerCase() || "neutral";
+
+  if (sentiment === "positive") {
+    score = 3;
+    userData.weeklyStats.positiveComments++;
+  } else if (sentiment === "neutral" || sentiment === "normal") {
+    score = 2;
+    userData.weeklyStats.neutralComments = (userData.weeklyStats.neutralComments || 0) + 1;
+  } else if (sentiment === "negative") {
+    score = -3;
+    userData.weeklyStats.negativeComments++;
+  } else {
+    // unknown → treat as neutral
+    score = 2;
+    userData.weeklyStats.neutralComments = (userData.weeklyStats.neutralComments || 0) + 1;
+  }
+
+  // --- APPLY SCORE TO TREE GROWTH ---
+
+  const tree = userData.trees?.find(t => t.id === userData.selectedTree);
+
+  console.log('Tree growth application:', {
+    hasTree: !!tree,
+    treeId: tree?.id,
+    treeStatus: tree?.status,
+    selectedTreeId: userData.selectedTree,
+    score: score,
+    sentiment: sentiment,
+    currentHealth: tree?.health,
+    currentProgress: tree?.growthProgress
+  });
+
+  if (tree && tree.status === "growing") {
+    if (score > 0) {
+      // Positive or Neutral
+      const oldHealth = tree.health || 0;
+      const oldProgress = tree.growthProgress || 0;
+      
+      tree.health = Math.min(100, (tree.health || 0) + score);
+      tree.growthProgress = Math.min(100, (tree.growthProgress || 0) + score);
+      tree.waterDrops = (tree.waterDrops || 0) + score;
+      tree.lastWatered = new Date().toISOString();
+      
+      console.log(`Tree grew! Health: ${oldHealth} → ${tree.health}, Progress: ${oldProgress} → ${tree.growthProgress}`);
+    } else {
+      // Negative
+      const damage = Math.abs(score);
+      const oldHealth = tree.health || 0;
+      const oldProgress = tree.growthProgress || 0;
+      
+      tree.health = Math.max(0, (tree.health || 0) - damage);
+      tree.growthProgress = Math.max(0, (tree.growthProgress || 0) - damage);
+      tree.poisonDrops = (tree.poisonDrops || 0) + damage;
+      tree.lastPoisoned = new Date().toISOString();
+
+      console.log(`Tree damaged! Health: ${oldHealth} → ${tree.health}, Progress: ${oldProgress} → ${tree.growthProgress}, Damage: ${damage}`);
+
+      if (tree.health <= 0) {
+        tree.status = "dead";
+        tree.deathDate = new Date().toISOString();
+        console.log('Tree died!');
+      }
+    }
+  } else {
+    if (!tree) {
+      console.warn(' No tree found! Trees:', userData.trees?.length, 'Selected:', userData.selectedTree);
+    } else if (tree.status !== "growing") {
+      console.warn(`Tree status is "${tree.status}", not "growing"`);
+    }
+  }
+
+  // --- STORE FULL COMMENT HISTORY (NO TRUNCATION) ---
+  userData.commentHistory = userData.commentHistory || [];
+
+  userData.commentHistory.unshift({
+    id: `comment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    text: commentData.text,
+    platform: commentData.platform || "unknown",
+    url: commentData.url || "",
+    sentiment,
+    impact: score,              
+    timestamp: commentData.timestamp || new Date().toISOString(),
+    category: analysis.category,
+    confidence: analysis.confidence,
+    syncedToBackend: false,
+    backendId: null
+  });
+
+
+  return userData;
+}
+
+
   /**
-   * ✅ Periodic backend sync - syncs unsynced comments every 10 minutes
+   * Periodic backend sync - syncs unsynced comments every 10 minutes
    */
   async syncPendingCommentsToBackend() {
     try {
@@ -462,15 +496,15 @@ class TreeGrowthBackground {
       const userData = storageResult.treeGrowthData;
 
       if (!userProfile?.extensionUserId || !userData?.commentHistory) {
-        console.log('⏭️ Skipping periodic sync - no user or comment data');
+        console.log('Skipping periodic sync - no user or comment data');
         return;
       }
 
-      console.log('🔄 Syncing pending comments to backend...');
+      console.log('Syncing pending comments to backend...');
       const unsynced = userData.commentHistory.filter(c => !c.syncedToBackend);
       
       if (unsynced.length === 0) {
-        console.log('✅ No pending comments to sync');
+        console.log('No pending comments to sync');
         return;
       }
 
@@ -480,6 +514,10 @@ class TreeGrowthBackground {
       // Sync max 20 at a time to avoid overwhelming the backend
       for (const comment of unsynced.slice(0, 20)) {
         try {
+          // Get current tree type
+          const currentTree = userData?.trees?.find(t => t.id === userData.selectedTree);
+          const treeType = currentTree?.type || null;
+          
           const categories = [{
             name: comment.category || 'Normal',
             score: comment.confidence || 0.5
@@ -491,7 +529,12 @@ class TreeGrowthBackground {
             comment.platform || 'unknown',
             comment.sentiment,
             comment.confidence || 0.5,
-            categories
+            categories,
+            comment.impact || 1,
+            (comment.sentiment === 'positive' ? (comment.impact || 1) : 0),
+            (comment.sentiment === 'neutral' ? Math.abs(comment.impact || 0) : 0)
+            (comment.sentiment === 'negative' ? Math.abs(comment.impact || 1) : 0),
+            treeType
           );
 
           if (result.success) {
@@ -511,10 +554,10 @@ class TreeGrowthBackground {
 
       if (syncedCount > 0) {
         await chrome.storage.local.set({ treeGrowthData: userData });
-        console.log(`✅ Synced ${syncedCount} comments to backend`);
+        console.log(`Synced ${syncedCount} comments to backend`);
       }
     } catch (error) {
-      console.error('❌ Background sync error:', error);
+      console.error(' Background sync error:', error);
     }
   }
 
@@ -535,11 +578,17 @@ class TreeGrowthBackground {
   }
 
   calculateUserPosition(weeklyStats) {
-    const userScore = (weeklyStats?.positiveComments || 0) * 10;
-    if (userScore >= 150) return Math.floor(Math.random() * 10) + 1;
-    if (userScore >= 100) return Math.floor(Math.random() * 20) + 10;
-    if (userScore >= 50)  return Math.floor(Math.random() * 30) + 20;
-    return Math.floor(Math.random() * 50) + 50;
+    // Use real scoring calculation: +3 positive, +2 neutral, -3 negative
+    const positiveScore = (weeklyStats?.positiveComments || 0) * 3;
+    const neutralScore = (weeklyStats?.neutralComments || 0) * 2;
+    const negativeScore = (weeklyStats?.negativeComments || 0) * -3;
+    const userScore = positiveScore + neutralScore + negativeScore;
+    
+    // Estimate position based on score (simulated until we have multi-user backend ranking)
+    if (userScore >= 150) return Math.floor(Math.random() * 10) + 1;   // Rank 1-10
+    if (userScore >= 100) return Math.floor(Math.random() * 20) + 10;  // Rank 10-30
+    if (userScore >= 50)  return Math.floor(Math.random() * 30) + 20;  // Rank 20-50
+    return Math.floor(Math.random() * 50) + 50;  // Rank 50-100
   }
 
   notifyPopup(message) {
