@@ -250,7 +250,7 @@ class TreeGrowthExtension {
         console.log(`Setting up button ${index}:`, btn);
         btn.addEventListener('click', (e) => {
           e.stopPropagation(); // Prevent card click
-          console.log('✅ BUTTON CLICKED!');
+          console.log('BUTTON CLICKED!');
           const treeId = btn.getAttribute('data-tree-id');
           console.log('Tree ID:', treeId);
           const tree = this.components.treeTypes.find(t => t.id === treeId);
@@ -816,7 +816,7 @@ class TreeGrowthExtension {
         // Store backend tree ID
         newTree.backendId = backendResult.data.id;
         newTree.syncedToBackend = true;
-        console.log('✅ Tree planted in backend:', backendResult.data.id);
+        console.log('Tree planted in backend:', backendResult.data.id);
         
         // Update storage with backend ID
         await chrome.runtime.sendMessage({ 
@@ -824,7 +824,7 @@ class TreeGrowthExtension {
           data: this.data 
         });
       } else {
-        console.warn('⚠️ Backend tree planting failed:', backendResult.error);
+        console.warn('Backend tree planting failed:', backendResult.error);
       }
       
       // NEW: Log tree planting analytics
@@ -1100,9 +1100,9 @@ class TreeGrowthExtension {
       );
       
       if (backendResult.success) {
-        console.log('✅ User registered in backend successfully');
+        console.log('User registered in backend successfully');
       } else {
-        console.warn('⚠️ Backend registration failed, continuing with local data:', backendResult.error);
+        console.warn('Backend registration failed, continuing with local data:', backendResult.error);
       }
       
       // NEW: Log signup analytics event
@@ -1140,7 +1140,7 @@ class TreeGrowthExtension {
       this.userData.extensionUserId
     );
     
-    console.log('✅ Backend sync complete:', syncResult);
+    console.log('Backend sync complete:', syncResult);
     
     // Fetch latest leaderboard data
     const leaderboardResult = await BackendIntegration.getLeaderboardBackend(50);
@@ -1154,7 +1154,7 @@ class TreeGrowthExtension {
       this.userData.extensionUserId
     );
     if (rankResult.success && rankResult.data) {
-      console.log('🏆 User rank:', rankResult.data.rank);
+      console.log('User rank:', rankResult.data.rank);
       this.weeklyRanking = rankResult.data.rank || 99;
     }
     
@@ -1164,14 +1164,14 @@ class TreeGrowthExtension {
       true
     );
     if (ticketsResult.success && ticketsResult.data) {
-      console.log('🎫 User tickets:', ticketsResult.data);
+      console.log('User tickets:', ticketsResult.data);
       if (!this.DEMO_MODE) {
         this.monthlyTickets = ticketsResult.data.length || 0;
       }
     }
     
   } catch (error) {
-    console.error('❌ Backend sync error:', error);
+    console.error('Backend sync error:', error);
   }
 }
 
@@ -2258,7 +2258,7 @@ class TreeGrowthExtension {
       <div class="main-game" style="overflow-y: auto; max-height: 100vh;">
         <div class="game-header">
           <div class="header-info">
-            <h1>👑 December 2024 Monthly Lottery</h1>
+            <h1>👑 December 2025 Monthly Lottery</h1>
             <p>Spin the wheel with your ${treeEmoji} ${treeType} tickets</p>
           </div>
           <button class="action-btn" id="back-to-game">← Back to Garden</button>
@@ -2310,7 +2310,7 @@ class TreeGrowthExtension {
         <!-- Weekly Ticket History -->
         <div style="background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin: 16px;">
           <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-            📅 December 2024 Ticket History
+            📅 December 2025 Ticket History
           </h3>
           
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px;">
@@ -2422,7 +2422,7 @@ class TreeGrowthExtension {
         <!-- Monthly Stats -->
         <div style="background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin: 16px;">
           <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-            🏆 December 2024 Lottery Stats
+            🏆 December 2025 Lottery Stats
           </h3>
           
           <div style="text-align: center; margin-bottom: 16px;">
