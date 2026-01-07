@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tree Growth Game</title>
+  <link rel="stylesheet" href="styles/extension.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <style>
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f4f6;
+      border-top: 4px solid #22c55e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Main Game Styles */
+    .main-game {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      gap: 24px;
+    }
+
+    .header-info {
+      flex: 1;
+    }
+
+    .title-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .title-section h1 {
+      margin: 0;
+      font-size: 1.875rem;
+      font-weight: 700;
+    }
+
+    .committed-badge {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .progress-message {
+      margin: 0;
+      color: #717182;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .action-btn {
+      padding: 8px 16px;
+      background: white;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #374151;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .action-btn:hover {
+      background: #f9fafb;
+    }
+
+    .revive-btn {
+      background: #ef4444;
+      color: white;
+      border-color: #ef4444;
+    }
+
+    .revive-btn:hover {
+      background: #dc2626;
+    }
+
+    .connection-alert {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 24px;
+    }
+
+    .alert-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #0369a1;
+    }
+
+    .manage-connections-btn {
+      background: none;
+      border: none;
+      color: #0369a1;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .celebration-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .celebration-content {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      max-width: 400px;
+      margin: 1rem;
+    }
+
+    .celebration-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .celebration-content h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .celebration-content p {
+      margin: 0 0 1rem 0;
+      color: #717182;
+    }
+
+    .achievement-badge {
+      background: #dcfce7;
+      color: #166534;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dead-tree-alert {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #dc2626;
+    }
+
+    .main-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .left-column, .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .growth-goals-card {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .card-header h3 {
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-subtitle {
+      margin: 0;
+      color: #717182;
+      font-size: 0.875rem;
+    }
+
+    .card-content {
+      margin-top: 16px;
+    }
+
+    .ranking-badge-section {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border: 1px solid #bae6fd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .ranking-badge {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .badge-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .position-badge {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .position-badge::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 12px;
+      height: 12px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .badge-info {
+      flex: 1;
+    }
+
+    .badge-title {
+      font-weight: 500;
+      color: #0369a1;
+    }
+
+    .badge-subtitle {
+      font-size: 0.875rem;
+      color: #0369a1;
+      opacity: 0.8;
+    }
+
+    .badge-stats {
+      text-align: right;
+    }
+
+    .stat-number {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #0369a1;
+      opacity: 0.8;
+    }
+
+    .view-rankings-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      border: none;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .view-rankings-btn:hover {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .goals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .goal-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+
+    .goal-status {
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .goal-status.achieved {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .goal-status.pending {
+      background: #f3f4f6;
+      color: #6b7280;
+      border: 1px solid #d1d5db;
+    }
+
+    .ticket-tracker-card {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .ticket-display {
+      text-align: center;
+      margin: 16px 0;
+      padding: 20px;
+      background: #f9fafb;
+      border-radius: 8px;
+    }
+
+    .ticket-count {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #7c3aed;
+    }
+
+    .ticket-label {
+      color: #717182;
+      font-size: 0.875rem;
+    }
+
+    .ticket-info {
+      margin: 16px 0;
+      font-size: 0.875rem;
+      color: #717182;
+    }
+
+    .ticket-info p {
+      margin: 4px 0;
+    }
+
+    .lottery-btn {
+      width: 100%;
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lottery-btn:hover:not(:disabled) {
+      background: #6d28d9;
+    }
+
+    .lottery-btn:disabled {
+      background: #d1d5db;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .comment-history-card {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .comment-item {
+      padding: 12px;
+      border-radius: 6px;
+      border-left: 4px solid;
+    }
+
+    .comment-item.positive {
+      background: #f0fdf4;
+      border-color: #22c55e;
+    }
+
+    .comment-item.negative {
+      background: #fef2f2;
+      border-color: #ef4444;
+    }
+
+    .comment-item.neutral {
+      background: #f9fafb;
+      border-color: #6b7280;
+    }
+
+    .comment-text {
+      font-size: 0.875rem;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .comment-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #717182;
+    }
+
+    .comment-impact {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+    }
+
+    .comment-impact.positive {
+      color: #16a34a;
+    }
+
+    .comment-impact.negative {
+      color: #dc2626;
+    }
+
+    .comment-impact.neutral {
+      color: #6b7280;
+    }
+
+    .no-comments {
+      text-align: center;
+      padding: 40px 20px;
+      color: #717182;
+    }
+
+    .no-comments p {
+      margin: 8px 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .main-content-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .game-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .header-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .main-game {
+        padding: 16px;
+      }
+      
+      .action-btn {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+      }
+      
+      .title-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      
+      .title-section h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Tree Selection Styles */
+    .tree-selection {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+
+    .text-muted-foreground {
+      color: #717182;
+    }
+
+    .tree-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .tree-card {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tree-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      border-color: #22c55e;
+    }
+
+    .tree-card-header {
+      margin-bottom: 1rem;
+    }
+
+    .tree-emoji {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .tree-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .tree-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .difficulty-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .difficulty-badge.text-green-700 {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .difficulty-badge.text-orange-700 {
+      background: #fed7aa;
+      color: #9a3412;
+    }
+
+    .difficulty-badge.text-red-700 {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .tree-description {
+      color: #6b7280;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .tree-card-content {
+      margin-top: 1rem;
+    }
+
+    .growth-time {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      background: #f9fafb;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .growth-time .label {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .growth-time .value {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .benefits {
+      margin-bottom: 1rem;
+    }
+
+    .benefits-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 0.5rem;
+    }
+
+    .benefits-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 0.375rem;
+      line-height: 1.5;
+    }
+
+    .bullet {
+      width: 4px;
+      height: 4px;
+      background: #22c55e;
+      border-radius: 50%;
+      margin-top: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .select-tree-btn {
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      pointer-events: auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .select-tree-btn:hover {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    }
+
+    .select-tree-btn:active {
+      transform: translateY(0);
+    }
+
+    .how-it-works {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #f9fafb;
+      border-radius: 12px;
+    }
+
+    .how-it-works h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .instructions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .instruction-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .instruction-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .instruction-content {
+      flex: 1;
+    }
+
+    .instruction-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .instruction-desc {
+      font-size: 0.875rem;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    /* Tree color variants */
+    .tree-card.tree-red:hover { border-color: #ef4444; }
+    .tree-card.tree-orange:hover { border-color: #f97316; }
+    .tree-card.tree-green:hover { border-color: #10b981; }
+    .tree-card.tree-pink:hover { border-color: #ec4899; }
+    .tree-card.tree-yellow:hover { border-color: #eab308; }
+    .tree-card.tree-rose:hover { border-color: #f43f5e; }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Loading Tree Growth Game...</p>
+  </div>
+
+  <div id="app" style="display: none;"></div>
+
+  <script src="supabase-config.js"></script>
+  <script src="backend-integration.js"></script>
+  <script src="lib/components.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

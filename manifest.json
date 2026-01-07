@@ -1,0 +1,93 @@
+{
+  "manifest_version": 3,
+  "name": "Tree Growth - Social Media Game",
+  "version": "1.0",
+  "description": "Gamify positive social media behavior through AI-powered comment analysis and virtual tree growing",
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "downloads",
+    "offscreen"
+  ],
+
+  "host_permissions": [
+    "https://twitter.com/*",
+    "https://x.com/*",
+    "https://facebook.com/*",
+    "https://instagram.com/*",
+    "https://linkedin.com/*",
+    "https://reddit.com/*",
+    "https://youtube.com/*",
+    "https://tiktok.com/*",
+    "https://*.supabase.co/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://x.com/*",
+        "https://facebook.com/*",
+        "https://www.facebook.com/*",
+        "https://instagram.com/*",
+        "https://www.instagram.com/*",
+        "https://linkedin.com/*",
+        "https://www.linkedin.com/*",
+        "https://reddit.com/*",
+        "https://www.reddit.com/*",
+        "https://youtube.com/*",
+        "https://www.youtube.com/*",
+        "https://tiktok.com/*",
+        "https://www.tiktok.com/*"
+      ],
+      "js": ["content-script.js"],
+      "css": ["styles/extension.css", "styles/components.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tree Growth Game",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "styles/*",
+        "lib/components.js",
+        "index.html",
+        "index.js",
+        "detection-service.js",
+        "content-script.js",
+        "offscreen.html",
+        "offscreen-detector.js",
+        "vendor/transformers/transformers.min.js",
+        "app/turkish-text-classification-model/**"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  }
+}
