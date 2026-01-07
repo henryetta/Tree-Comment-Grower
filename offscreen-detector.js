@@ -8,7 +8,7 @@ let pipe = null;
 // Allow reading packaged model files from chrome-extension://
 env.allowLocalModels = true;
 
-const MODEL_PATH = chrome.runtime.getURL("app/turkish-text-classification-model");
+const MODEL_PATH = chrome.runtime.getURL("app/#modelname#-model");
 
 // Tell background we’re alive as soon as the offscreen page loads
 chrome.runtime.sendMessage(
