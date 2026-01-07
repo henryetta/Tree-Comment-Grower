@@ -247,7 +247,7 @@ class TreeGrowthContentScript {
       genericSelectors.forEach(selector => {
         const inputs = document.querySelectorAll(selector);
         if (inputs.length > 0) {
-          this.log(`✅ Generic selector "${selector}" found ${inputs.length} inputs`);
+          this.log(`Generic selector "${selector}" found ${inputs.length} inputs`);
           // Only add inputs that look like comment fields
           inputs.forEach(input => {
             const placeholder = input.placeholder || input.getAttribute('aria-label') || '';
@@ -428,7 +428,7 @@ class TreeGrowthContentScript {
       const notDuplicate = commentText !== this.lastCapturedText;
       
       if ((matchesTypedText || recentlyCommenting) && notDuplicate) {
-        this.log(`✅ Capturing USER comment (${commentText.length} chars): \"${commentText.substring(0, 50)}...\"`);
+        this.log(`Capturing USER comment (${commentText.length} chars): \"${commentText.substring(0, 50)}...\"`);
         
         this.sendCommentToBackground({
           text: commentText.trim(),
@@ -448,10 +448,10 @@ class TreeGrowthContentScript {
         this.isUserCommenting = false;
         this.lastTypedText = '';
       } else {
-        this.log(`❌ NOT capturing - matchesTyped: ${matchesTypedText}, recentlyCommenting: ${recentlyCommenting}, notDuplicate: ${notDuplicate}`, 'warn');
+        this.log(`NOT capturing - matchesTyped: ${matchesTypedText}, recentlyCommenting: ${recentlyCommenting}, notDuplicate: ${notDuplicate}`, 'warn');
       }
     } else {
-      this.log(`❌ NOT capturing - text is empty`, 'warn');
+      this.log(`NOT capturing - text is empty`, 'warn');
     }
   }
 
