@@ -101,7 +101,7 @@ async function sbPatch(table, match, updates) {
 //helper function
 async function getUserRowByExtensionId(extensionUserId) {
   const r = await sbFetch(
-    `/rest/v1/users?extension_user_id=eq.${encodeURIComponent(extensionUserId)}&select=id,extension_user_id,username,email&limit=1`
+    `/rest/v1/users?extension_user_id=eq.${encodeURIComponent(extensionUserId)}&select=id,extension_user_id,username&limit=1`
   );
   return Array.isArray(r) ? (r[0] || null) : r;
 }
@@ -293,7 +293,7 @@ function generateExtensionUserId() {
 async function safeApiCall(apiFunction, fallbackMessage = 'Backend sync failed') {
   try {
     const result = await apiFunction();
-    console.log('✅ Backend sync successful:', result);
+    console.log('Backend sync successful:', result);
     return { success: true, data: result };
   } catch (error) {
     console.warn(`⚠️ ${fallbackMessage}:`, error);
@@ -490,10 +490,10 @@ async function syncUserDataToBackend(extensionUserId) {
       await chrome.storage.local.set({ treeGrowthData: localData });
     }
 
-    console.log('✅ Sync complete:', syncResults);
+    console.log('Sync complete:', syncResults);
     return syncResults;
   } catch (error) {
-    console.error('❌ Sync failed:', error);
+    console.error('Sync failed:', error);
     return { comments: 0, trees: 0, errors: [error.message] };
   }
 }
