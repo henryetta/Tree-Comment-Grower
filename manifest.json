@@ -15,12 +15,7 @@
   "host_permissions": [
     "https://twitter.com/*",
     "https://x.com/*",
-    "https://facebook.com/*",
     "https://instagram.com/*",
-    "https://linkedin.com/*",
-    "https://reddit.com/*",
-    "https://youtube.com/*",
-    "https://tiktok.com/*",
     "https://*.supabase.co/*"
   ],
 
@@ -33,18 +28,8 @@
       "matches": [
         "https://twitter.com/*",
         "https://x.com/*",
-        "https://facebook.com/*",
-        "https://www.facebook.com/*",
         "https://instagram.com/*",
-        "https://www.instagram.com/*",
-        "https://linkedin.com/*",
-        "https://www.linkedin.com/*",
-        "https://reddit.com/*",
-        "https://www.reddit.com/*",
-        "https://youtube.com/*",
-        "https://www.youtube.com/*",
-        "https://tiktok.com/*",
-        "https://www.tiktok.com/*"
+        "https://www.instagram.com/*"
       ],
       "js": ["content-script.js"],
       "css": ["styles/extension.css", "styles/components.css"],
