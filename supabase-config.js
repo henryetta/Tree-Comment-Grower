@@ -3,13 +3,13 @@
  */
 
 // Supabase Project URL
-const SUPABASE_URL = 'https://uxzxughwcdbuzrkmewpc.supabase.co';
+const SUPABASE_URL = '';
 
 // Supabase Anon/Public Key
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4enh1Z2h3Y2RidXpya21ld3BjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEwMDg4NzcsImV4cCI6MjA3NjU4NDg3N30.SxHtqCak7EYOx8wg2ZIzlQcjH3MVFLVtFAZjEyZxTU0';
+const SUPABASE_ANON_KEY = '';
 
 // API Base URL for the Tree Growth backend
-const API_BASE_URL = `${SUPABASE_URL}/functions/v1/server/make-server-4a3cc8d2`;
+const API_BASE_URL = `${SUPABASE_URL}/functions/v1/server/make-server-###`;
 
 /**
  * Make an API request to the backend
