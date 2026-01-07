@@ -265,7 +265,7 @@ export class ExtensionDetectionService {
     };
   }
 
-  // ---------- HTTP model (optional) ----------
+  // ---------- HTTP model ----------
   async callCustomModel(text) {
     const headers = { 'Content-Type': 'application/json' };
     if (this.config.apiKey) headers['Authorization'] = `Bearer ${this.config.apiKey}`;
@@ -289,7 +289,7 @@ export class ExtensionDetectionService {
     }
   }
 
-  // ---------- Strong fallbacks (covers obvious profanity) ----------
+  // ---------- Strong fallbacks----------
   fallbackAnalysis(text) {
     const lower = String(text || '').toLowerCase();
     const count = (arr) => arr.reduce((n, w) => n + (lower.includes(w) ? 1 : 0), 0);
