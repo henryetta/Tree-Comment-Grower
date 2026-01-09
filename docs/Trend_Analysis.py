@@ -26,7 +26,7 @@ weekly_drops['poison_pct'] = (weekly_drops['poison_drops'] / weekly_drops['total
 
 weeks = sentiment_by_week.index.astype(int)
 
-# === 1. SENTIMENT PERCENTAGE WITH ERROR BARS ===
+# === SENTIMENT PERCENTAGE WITH ERROR BARS ===
 plt.figure(figsize=(20, 10))
 
 plt.plot(weeks, sentiment_pct['positive'], 
@@ -88,7 +88,7 @@ plt.tight_layout()
 plt.savefig('sentiment_percentage_individual.png', dpi=DPI, bbox_inches='tight')
 plt.show()
 
-# === 2. SENTIMENT RAW COUNTS WITH ERROR BARS  ===
+# ===  SENTIMENT RAW COUNTS WITH ERROR BARS  ===
 plt.figure(figsize=(20, 10))
 
 plt.plot(weeks, sentiment_by_week['positive'], 
@@ -147,7 +147,7 @@ plt.tight_layout()
 plt.savefig('sentiment_counts_individual.png', dpi=DPI, bbox_inches='tight')
 plt.show()
 
-# === 3. CUMULATIVE GROWTH WITH ANNOTATED VALUES ===
+# === CUMULATIVE GROWTH WITH ANNOTATED VALUES ===
 plt.figure(figsize=(20, 10))
 
 # Calculate cumulative values
@@ -208,7 +208,7 @@ plt.show()
 
 
 
-# === 7. WEEK-BY-WEEK SENTIMENT INTENSITY HEATMAP===
+# ===  WEEK-BY-WEEK SENTIMENT INTENSITY HEATMAP===
 plt.figure(figsize=(20, 10))
 
 # Create heatmap data
@@ -238,7 +238,7 @@ plt.tight_layout()
 plt.savefig('sentiment_heatmap_individual.png', dpi=DPI, bbox_inches='tight')
 plt.show()
 
-# === 8. CUMULATIVE SENTIMENT HEATMAP===
+# === CUMULATIVE SENTIMENT HEATMAP===
 plt.figure(figsize=(20, 10))
 
 # Cumulative heatmap data
@@ -268,7 +268,7 @@ plt.tight_layout()
 plt.savefig('cumulative_sentiment_heatmap_individual.png', dpi=DPI, bbox_inches='tight')
 plt.show()
 
-# === PREPARE DATA ===
+# === WATER AND POISON DATA TREND===
 sentiment_by_week = df.groupby(['week_number', 'sentiment']).size().unstack(fill_value=0).sort_index()
 sentiment_pct = sentiment_by_week.div(sentiment_by_week.sum(axis=1), axis=0) * 100
 weekly_drops = df.groupby('week_number').agg({
@@ -281,7 +281,7 @@ weekly_drops['poison_pct'] = (weekly_drops['poison_drops'] / weekly_drops['total
 
 weeks = sentiment_by_week.index.astype(int)
 
-# === 1. WATER vs POISON ACTUAL COUNTS ===
+# ===  WATER vs POISON ACTUAL COUNTS ===
 plt.figure(figsize=(20, 10))
 
 plt.plot(weeks, weekly_drops['water_drops'], 
@@ -332,7 +332,7 @@ plt.tight_layout()
 plt.savefig('water_poison_actual_counts_individual.png', dpi=DPI, bbox_inches='tight')
 plt.show()
 
-# === 2. WATER vs POISON PERCENTAGE DISTRIBUTION  ===
+# === WATER vs POISON PERCENTAGE DISTRIBUTION  ===
 plt.figure(figsize=(20, 10))
 
 plt.plot(weeks, weekly_drops['water_pct'], 
@@ -384,7 +384,7 @@ plt.tight_layout()
 plt.savefig('water_poison_percentage_individual.png', dpi=DPI, bbox_inches='tight')
 plt.show()
 
-# === 3. WATER-TO-POISON RATIO  ===
+# === WATER-TO-POISON RATIO  ===
 plt.figure(figsize=(20, 10))
 
 ratio = weekly_drops['water_drops'] / (weekly_drops['poison_drops'] + 1e-10)  # Avoid division by zero
@@ -422,7 +422,7 @@ plt.tight_layout()
 plt.savefig('water_poison_ratio_individual.png', dpi=DPI, bbox_inches='tight')
 plt.show()
 
-# === 4. HEATMAPS ===
+# === HEATMAPS ===
 
 # Combined water/poison heatmap
 plt.figure(figsize=(20, 10))
@@ -441,7 +441,7 @@ plt.savefig('water_poison_combined_heatmap_individual.png', dpi=DPI, bbox_inches
 plt.show()
 
 
-# Create a cleaner summary table
+# Create a summary table
 print("\n" + "="*80)
 print("SENTIMENT TREND ANALYSIS SUMMARY")
 print("="*80)
