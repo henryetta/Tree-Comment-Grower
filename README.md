@@ -1,5 +1,5 @@
 # Tree-Comment-Grower
-Privacy Policy for the Tree Comment Grower Game
+Details about this extension
 # Permission Justification for Chrome Web Store Review
 
 ## Extension Overview
