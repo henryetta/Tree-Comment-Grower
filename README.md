@@ -50,7 +50,7 @@ Our extension monitors text input **in real-time** on social media platforms to 
 ## Privacy & Security Measures
 
 ### 1. Minimal Data Collection
-- Only stores: username, email, comment text (user's own), timestamps
+- Only stores: comment text (user's own), timestamps
 - No tracking of browsing behavior
 - No data sold to third parties
 - No analytics or tracking pixels
@@ -69,7 +69,7 @@ Our extension monitors text input **in real-time** on social media platforms to 
 
 ### 4. Transparent Operation
 - Extension icon shows when active
-- User explicitly signs up and selects a tree to start
+- User explicitly downloads extension and selects a tree to start
 - Clear UI feedback when monitoring comments
 - Easy opt-out via disabling extension
 
@@ -125,7 +125,7 @@ Our extension monitors text input **in real-time** on social media platforms to 
 5. Type toxic comment → See "Profanity/Derogatory" category + poison drop
 
 ### Live Social Media Test:
-1. Go to twitter.com or reddit.com
+1. Go to twitter.com
 2. Start typing in any comment box
 3. Extension detects text input in real-time
 4. Positive comments add water (tree grows)
@@ -157,6 +157,6 @@ No Hidden Behavior: Extension does exactly what description states
 
 ## Summary
 
-This extension requires host permissions for its **core educational functionality** - monitoring user's own comments across social media to gamify positive communication. All AI processing occurs **locally on-device**, data collection is **minimal and transparent**, and users have **full control** over their data. The permissions requested are the **minimum necessary** to deliver the promised experience.
+This extension requires host permissions for its **core educational functionality** - monitoring user's own comments across social media to visualize cummulative online interaction. All AI processing occurs **locally on-device**, data collection is **minimal and transparent**, and users have **full control** over their data. The permissions requested are the **minimum necessary** to deliver the promised experience.
 
 We are committed to user privacy and transparency in all aspects of this educational tool.
