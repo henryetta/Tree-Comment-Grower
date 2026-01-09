@@ -3,7 +3,7 @@ Details about this extension
 # Permission Justification for Chrome Web Store Review
 
 ## Extension Overview
-**Tree Growth - Social Media Game** is an educational gamification tool that helps users improve their online communication skills through AI-powered comment analysis and visual feedback via virtual tree growing.
+**Tree Growth - Social Media Game** is an educational game-visual tool that helps users improve their online communication skills through AI-powered comment analysis and visual feedback via virtual tree growing.
 
 ---
 
