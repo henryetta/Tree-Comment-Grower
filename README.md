@@ -501,6 +501,6 @@ This project represents the culmination of doctoral research investigating how i
 
 ---
 
-*GrowthForest - Reducing psychological distance, one comment at a time* 
+*🌱TreeGrowth  - Reducing psychological distance, one comment at a time* 
 
 **Research completed. System deployed. Behavior changed.**
