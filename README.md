@@ -1,4 +1,4 @@
-# 🌱 GrowthForest: A Longitudinal Browser-Based Intervention for Reducing Psychological Distance and Lack of Awareness in Online Commenting
+# 🌱TreeGrowth - Comment Grower: A Longitudinal Browser-Based Intervention for Reducing Psychological Distance and Lack of Awareness in Online Commenting
 
 **PhD Research Project | Behavior Change Through Persistent Visualization**
 
